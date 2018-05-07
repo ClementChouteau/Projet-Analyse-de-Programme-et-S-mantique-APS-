@@ -1,0 +1,7 @@
+[
+	CONST t1 (vec int) (alloc 2);
+	CONST t2 (vec int) (alloc 2);
+	SET (nth t1 0) 40;
+	SET (nth t2 1) 2;
+	ECHO (add (nth t1 0) (nth t2 1))
+]

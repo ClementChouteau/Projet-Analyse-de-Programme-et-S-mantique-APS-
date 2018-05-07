@@ -1,0 +1,14 @@
+[
+	CONST xs (vec int) (alloc 4);
+	VAR sum int;
+	SET sum 0;
+	VAR i int;
+	SET i 0;
+	WHILE (lt i (len xs))
+	[
+		SET (nth xs i) (add i 9);
+		SET sum (add sum (nth xs i));
+		SET i (add i 1)
+	];
+	ECHO sum
+]

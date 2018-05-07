@@ -1,0 +1,13 @@
+[
+  FUN REC fold int [f:(int*int -> int), xs:(vec int), a:int, i:int] (
+    if (lt i (len xs)) 
+      (f (nth xs i) (fold f xs a (add i 1)))
+      a
+  );
+  CONST xs (vec int) (alloc 4);
+  SET (nth xs 0) 9;
+  SET (nth xs 1) 10;
+  SET (nth xs 2) 11;
+  SET (nth xs 3) 12;
+  ECHO (fold [x:int,y:int](add x y) xs 0 0)
+]

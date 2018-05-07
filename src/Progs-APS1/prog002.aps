@@ -1,0 +1,6 @@
+[
+	VAR X int;
+	SET X 3;
+	IF (eq X 3) [SET X 42] [SET X 2];
+	ECHO X
+]

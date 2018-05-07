@@ -1,0 +1,7 @@
+[
+	CONST t2 (vec int) (alloc 3);
+	VAR t (vec int);
+	PROC allocproc [y:int] [VAR x int; SET t (alloc 2); SET x 3; SET (nth t 1) 42];
+	CALL allocproc 1;
+	ECHO (nth t 1)
+]

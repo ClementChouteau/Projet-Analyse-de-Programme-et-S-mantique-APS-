@@ -1,0 +1,18 @@
+[
+  CONST xss (vec (vec bool)) (alloc 4);
+  VAR i int;
+  SET i 0;
+  WHILE (lt i (len xss))
+    [
+      SET (nth xss i) (alloc (add i 9));
+      SET i (add i 1)
+    ];
+  SET (nth (nth xss 0) 0) true;
+  VAR sum int;
+  SET sum 0;
+  SET sum (add sum (len (nth xss 0)));
+  SET sum (add sum (len (nth xss 1)));
+  SET sum (add sum (len (nth xss 2)));
+  SET sum (add sum (len (nth xss 3)));
+  ECHO sum
+]

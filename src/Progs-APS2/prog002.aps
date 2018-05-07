@@ -1,0 +1,9 @@
+[
+	VAR t (vec (vec int));
+	SET t (alloc 2);
+	SET (nth t 0) (alloc 2);
+	SET (nth t 1) (alloc 2);
+	SET (nth (nth t 0) 1) 40;
+	SET (nth (nth t 1) 0) 2;
+	ECHO (add (nth (nth t 0) 1) (nth (nth t 1) 0))
+]

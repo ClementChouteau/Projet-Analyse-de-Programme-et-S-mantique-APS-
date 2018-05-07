@@ -1,0 +1,4 @@
+[
+	FUN REC fact int [n:int] (if (eq n 0) 1 (mul n (fact (sub n 1))) );
+	ECHO (add (fact 4) 18)
+]

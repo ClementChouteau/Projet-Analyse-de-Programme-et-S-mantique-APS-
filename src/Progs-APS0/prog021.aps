@@ -1,0 +1,4 @@
+[
+  CONST add3 (int * int * int -> int) [x:int, y:int, z:int] (add (add x y) z);
+  ECHO (add3 1 2 39)
+]

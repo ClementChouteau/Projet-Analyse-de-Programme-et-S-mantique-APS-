@@ -1,0 +1,5 @@
+[
+	FUN f (vec int) [n:int] [RETURN (alloc n)];
+	VAR x (vec int);
+	SET x (f 42)
+]

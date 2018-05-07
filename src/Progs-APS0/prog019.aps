@@ -1,0 +1,4 @@
+[
+  FUN succ int [x:int](add x 1);
+  ECHO (succ 41)
+]

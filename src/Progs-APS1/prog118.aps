@@ -1,0 +1,8 @@
+[
+  VAR x int;
+  SET x 42;
+  IF true
+    [ VAR x bool; SET x false ]
+    [ ECHO x ];
+  ECHO x
+]

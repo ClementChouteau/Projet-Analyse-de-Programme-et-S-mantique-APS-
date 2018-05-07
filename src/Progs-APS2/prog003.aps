@@ -1,0 +1,4 @@
+[
+	CONST t (vec int) (alloc 42);
+	ECHO (len t)
+]

@@ -1,0 +1,5 @@
+[
+	VAR X int;
+	FUN quaranteDeux int [x:int] [IF (eq x 42) [SET X 2] [RETURN 0]; RETURN 42];
+	ECHO (quaranteDeux 42)
+]

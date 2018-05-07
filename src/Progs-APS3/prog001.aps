@@ -1,0 +1,4 @@
+[
+	FUN quaranteDeux int [x:int] [RETURN x];
+	ECHO (quaranteDeux 42)
+]

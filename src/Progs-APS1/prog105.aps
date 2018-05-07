@@ -1,0 +1,11 @@
+[
+	VAR x int;
+	VAR y int;
+	SET x 42;
+	IF (eq x 42)
+		[ ECHO x ]
+		[ SET y 42 ];
+	IF (eq y 42)
+		[ ECHO 3 ]
+		[ SET x 1 ]
+]

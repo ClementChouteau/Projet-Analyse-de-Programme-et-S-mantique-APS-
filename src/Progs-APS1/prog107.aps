@@ -1,0 +1,12 @@
+[
+	VAR x int;
+	SET x 0;
+	IF (not (eq x 0))
+		[ ECHO x ]
+		[
+			WHILE (lt x 42) [
+				SET x (add x 1)
+			]
+		];
+	ECHO x
+]

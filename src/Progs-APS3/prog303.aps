@@ -1,0 +1,9 @@
+[
+  FUN f int [x:int] [
+    IF (eq x 1)
+      [ RETURN 42 ]
+      [ ECHO x ];
+    RETURN 41
+  ];
+  ECHO (f 1)
+]
