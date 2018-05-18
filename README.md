@@ -1,3 +1,4 @@
+
 # Projet Analyse de Programme et Sémantique (APS)
 
 Implémentation d'un vérificateur de typage correct et d'un interpréteur du langage nommé APS dans le langage prolog, conversion APS vers un terme prolog faite en Ocaml avec ocamllex et ocamlyacc.
@@ -141,6 +142,17 @@ C'est implémenté en une cinquantaine de lignes de prolog, je pars des adresses
 ## Langage APS3
 
 Le langage APS3 permet aux parties impératives de APS de retourner une valeur  en introduisant la commande `RETURN x`,  le typage doit alors prendre en compte le fait qu'une suite de commande peut retourner une valeur ou non.
+```
+[
+  FUN f int [x:int] [
+    IF (eq x 1)
+      [ RETURN 42 ]
+      [ ECHO x ];
+    RETURN 41
+  ];
+  ECHO (f 1)
+]
+```
 On souhaite détecter les codes morts dû à un `RETURN` effectué au milieu d'un bloc.
 On introduit un terme Prolog `orVoid(T)` pour les suites de commandes dont toutes les branches ne font pas de return.
 ```prolog
@@ -156,4 +168,21 @@ cmds(G, [ret(E)], T) :- expr(G, E, T). % fin typée
 cmds(_, [], void). % fin non typée
 ```
 
-L'interprétation de APS3 n'est pas encore implémentée.
+Le langage APS3 demande de changer les moments où l'on choisit de faire une restriction mémoire, à cause de l'instruction `RETURN` pouvant être présente dans un bloc et retournant éventuellement une adresse non accessible depuis l'environnement (tableau alloué dans le bloc), on ne doit pas désallouer ces cases mémoire.
+```prolog
+stat(Env, Mem, O, call(X, Es), V, Mem3, O2) :-
+	contient(Env, X, closure_p(P, Xs, Envp)),
+	valeurs(Env, Mem, O, Es, Vs, Mem1, O1),
+	lier(Xs, Vs, XsVs),
+	append(XsVs, Envp, EnvpXsVs),
+	block(EnvpXsVs, Mem1, O1, P, V, Mem2, O2),
+	restriction([("@", V)|Env], Mem2, Mem3).
+```
+Lorsque l'on fait la restriction mémoire on ajoute donc la valeur `V` associée à un identifieur `"@"` (inutilisable dans le langage) afin de préserver la valeur `V` qui peut être utilisée par l'appelant.
+
+Il peut y avoir également des retours prématurés, dans une suite d'instructions, si la valeur de retour de l'évaluation d'une instruction n'est pas `vide`, on n'évalue pas le reste.
+```prolog
+cmds(Env, Mem, O, [Stat|_], V, Env, Mem1, O1) :- % instruction (avec RETURN)
+	stat(Env, Mem, O, Stat, V, Mem1, O1),
+	not(V = vide).
+```
