@@ -7,8 +7,9 @@
 	  [ RETURN (f (add x 1)) ]
 	  [ RETURN (f (sub x 1)) ]
       ]
-  ];    
-  ECHO (f 42);
-  ECHO (f 40);
-  ECHO (f 45)
+  ];
+
+  IF (and (eq (f 42) 42) (and (eq (f 40) 42) (eq (f 45) 42)))
+    [ ECHO 42 ]
+    [ ECHO 1 ]
 ]
